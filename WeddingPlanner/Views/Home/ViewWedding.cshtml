@@ -1,0 +1,17 @@
+    <div class="d-flex justify-content-between align-items-end">
+        <h1 class="display-4">@ViewBag.SingleWedding.WedderOne & @ViewBag.SingleWedding.WedderTwo Wedding</h1>
+        <div>
+            <a class="m-1" href="/dashboard">Dashboard</a>
+            <a class="m-1" href="/Logout">Logout</a>
+        </div>
+    </div>
+    <hr>
+    <h6>Date: @ViewBag.SingleWedding.Date.ToString("MMMM dd, yyyy hh:mm tt")</h6>
+    <h6>Address: @ViewBag.SingleWedding.Address</h6>
+    <h6>Guests: </h6>
+    <ul>
+        @foreach (Guests item in @ViewBag.SingleWedding.Attendees)
+        {
+            <li>@item.User.FirstName @item.User.LastName</li>
+        }
+    </ul>

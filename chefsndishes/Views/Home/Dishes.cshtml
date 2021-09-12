@@ -1,0 +1,30 @@
+<div class="text-center">
+    <div class="d-flex align-items-center justify-content-center">
+        <h1 class="display-4"><a href="/">Chefs</a></h1>
+        <h1 class="display-4">|Dishes</h1>
+    </div>
+    <a href="/dishes/new" class="text-right">Add a dish</a>
+</div>
+<p>Yum take a look at our tasty dishes!</p>
+<hr>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Dish Name</th>
+            <th scope="col">Chef</th>
+            <th scope="col">Tastiness</th>
+            <th scope="col">Calories</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Dish dish in @ViewBag.Dishes)
+        {
+        <tr>
+            <td>@dish.DishName</td>
+            <td>@dish.Chef.FirstName @dish.Chef.LastName</td>
+            <td>@dish.Tastiness</td>
+            <td>@dish.NumOfCals</td>
+        </tr>
+        }
+    </tbody>
+</table>

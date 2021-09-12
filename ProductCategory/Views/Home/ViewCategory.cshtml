@@ -1,0 +1,48 @@
+@{
+    ViewData["Title"] = "Single Category";
+}
+@model Association
+
+<div class="text-center">
+    <h1 class="display-4">@ViewBag.SingleCategory.Name</h1>
+</div>
+<hr>
+
+<div class="d-flex justify-content-around">
+    <div>
+        <h4>Categories</h4>
+        <ul>
+            @foreach (Association prod in @ViewBag.SingleCategory.ProductsInCategory)
+            {
+                <li>@prod.Product.Name</li>
+            }
+        </ul>
+    </div>
+    <div>
+        <h4>Add Product to Category</h4>
+        <form asp-action="AddProductToCat" asp-controller="Home" method="post">
+            <input type="hidden" asp-for="CategoryID" value="@ViewBag.SingleCategory.CategoryID">
+            <label asp-for="ProductID"></label>
+            <select asp-for="ProductID" class="form-control">
+                @foreach (Product prod in @ViewBag.ProdNotIn)
+                {
+                    bool HasCat = false;
+                    @foreach (Association prod2 in @ViewBag.SingleCategory.ProductsInCategory)
+                    {
+                        if(prod.ProductID == prod2.ProductID)
+                        {
+                            HasCat = true;
+                        }
+                    }
+                    if(!HasCat)
+                    {
+                    <option value="@prod.ProductID">@prod.Name</option>
+                    }
+                }
+            </select>
+            <input type="submit" class="btn btn-dark m-1">
+        </form>
+    </div>
+</div>
+
+<a href="/">Home</a>

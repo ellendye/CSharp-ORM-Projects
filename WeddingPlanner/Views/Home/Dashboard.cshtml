@@ -1,0 +1,55 @@
+@model Wedding
+    <div class="d-flex justify-content-between align-items-end">
+        <h1 class="display-4">Welcome to the Wedding Planner</h1>
+        <a class="m-1" href="/Logout">Logout</a>
+    </div>
+
+    <hr>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Wedding</th>
+                <th scope="col">Date</th>
+                <th scope="col">Guest</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Wedding item in @ViewBag.AllWeddings)
+            {
+                <tr>
+                    <td> <a href="wedding/@item.WeddingId">@item.WedderOne & @item.WedderTwo</a></td>
+                    <td>@item.Date.ToString("MMM dd, yyyy h:m tt")</td>
+                    <td>@item.Attendees.Count</td>
+                    @{
+                    if(@ViewBag.LoggedUser.UserId == @item.Creator.UserId)
+                    {
+                        <td><a href="Delete/@item.WeddingId">Delete</a></td>
+                    }
+                    else 
+                    {
+                        bool attending = true; 
+                        @foreach (Wedding l in @ViewBag.UserNoRSVP)
+                        {
+                            if (l.WeddingId == item.WeddingId)
+                            {
+                                attending = false;
+                            }
+                        }
+                        if (attending)
+                        {
+                            <td><a href="RemoveRSVP/@item.WeddingId">un-RSVP</a></td>
+                        }
+                        else
+                        {
+                            <td><a href="RSVP/@item.WeddingId">RSVP</a></td>
+                        }
+                    }
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a href="/WeddingPlanner" class="btn btn-dark m-1">New Wedding</a>

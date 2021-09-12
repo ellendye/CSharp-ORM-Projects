@@ -1,0 +1,50 @@
+@model Dish
+
+<div id="container">
+    <h1>Add a new dish!</h1>
+    <a href="/">Home</a>
+
+    <form asp-controller="Home" asp-action="SubmitDish" method="post">
+        <div id="form-group">
+            <label asp-for="DishName"></label>
+            <input asp-for="DishName" class="form-control">
+            <span class="text-danger" asp-validation-for="DishName"></span>
+        </div>
+
+        <div id="form-group">
+            <label asp-for="ChefID"></label>
+            <select asp-for="ChefID" class="form-control">
+            @foreach(Chef chef in ViewBag.AllChefs)
+            {
+                <option value="@chef.ChefId">@chef.FirstName @chef.LastName</option>
+            }
+            </select>
+        </div>
+
+        <div id="form-group">
+            <label asp-for="Tastiness"></label>
+            <select asp-for="Tastiness" class="form-control">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <span class="text-danger" asp-validation-for="Tastiness"></span>
+        </div>
+
+        <div id="form-group">
+            <label asp-for="NumOfCals"></label>
+            <input asp-for="NumOfCals" class="form-control">
+            <span class="text-danger" asp-validation-for="NumOfCals"></span>
+        </div>
+
+        <div id="form-group">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control" cols="30" rows="10"></textarea>
+            <span class="text-danger" asp-validation-for="Description"></span>
+        </div>
+
+        <input type="submit" class="btn btn-dark mt-3">
+    </form>
+</div>

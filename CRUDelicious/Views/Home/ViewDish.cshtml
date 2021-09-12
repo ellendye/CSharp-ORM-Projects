@@ -1,0 +1,12 @@
+<div class="text-center">
+    <h1 class="display-3">@ViewBag.OneDish.Name</h1>
+    <h3>By @ViewBag.OneDish.Chef</h3>
+    <hr>
+    <p><b>Tastiness: </b>@ViewBag.OneDish.Tastiness</p>
+    <p><b>Calories: </b>@ViewBag.OneDish.Calories</p>
+    <p><b>Description: </b>@ViewBag.OneDish.Description</p>
+    <div class="d-flex m-5 justify-content-around align-items-center">
+        <a href="delete/@ViewBag.OneDish.DishId" class="btn btn-dark">Delete</a>
+        <a href="edit/@ViewBag.OneDish.DishId" class="btn btn-dark">Edit</a>
+    </div>
+</div>

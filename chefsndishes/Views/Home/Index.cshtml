@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <div class="d-flex align-items-center justify-content-center">
+        <h1 class="display-4">Chefs| </h1>
+        <h1 class="display-4"><a href="/dishes">Dishes</a></h1>
+    </div>
+    <a href="/new">Add a Chef</a>
+</div>
+<p>Check out our roster of Chefs!</p>
+<hr>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">Number of Dishes</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Chef chef in @ViewBag.Chefs)
+        {
+        <tr>
+            <td>@chef.FirstName @chef.LastName</td>
+            <td>@((DateTime.Now.Subtract(@chef.Birthday)/365).ToString("dd"))</td>
+            <td>@chef.CreatedDishes.Count</td>
+        </tr>
+        }
+    </tbody>
+</table>

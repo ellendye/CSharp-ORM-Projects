@@ -1,0 +1,33 @@
+@model Transaction
+
+<div class="container w-75">
+    <h1 class="display-4 text-center">Welcome, @ViewBag.SingleUser.User.FirstName</h1>
+    <h3 class="text-center">Current balance:<b class="border m-4">$ @ViewBag.UserAccountBalance</b></h3>
+
+    <form asp-action="EditAmount" asp-controller="Home" method="post" class="w-50 d-flex align-items-center justify-content-around">
+        <div class="form-group">
+            <input type="hidden" asp-for="UserID" value="@ViewBag.SingleUser.UserID">
+            <label asp-for="Amount"></label>
+            <input class="form-control" asp-for="Amount">
+            <span asp-validation-for="Amount" class="text-danger"></span>
+        </div>
+        <input type="submit" class="btn btn-dark">
+    </form>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Transaction item in @ViewBag.SingleUser)
+            {
+                <tr>
+                    <td>@item.Amount</td>
+                    <td>@item.CreatedAt.ToString("MMM dd, yyyy")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
